@@ -1,20 +1,13 @@
 <script>
-  import { onDestroy } from 'svelte';
-    import countStores from './stores/count.store';
-    const unsubscribe = countStores.subscribe(value => {
-        console.log(value, 'count store');
-    });
-
-    setTimeout(() => {
-        countStores.update(value => {
-            return value + 300
-        });
-    }, 1000);
-
-    onDestroy(() => {
-        unsubscribe();
-    });
-
+    import { storeOne, storeTwo, storeSumEven, storeOneEven} from './stores/derived.store';
 </script>
 
-<h1>{$countStores}</h1>
+<h2>Sum of store is: {$storeSumEven}</h2>
+
+<h3>Store One: {$storeOne}</h3>
+<input type="range" bind:value={$storeOne} min="0" max="10">
+
+<h3>Store Tqo {$storeTwo}</h3>
+{$storeTwo}
+<input type="range" bind:value={$storeTwo} min="0" max="10">
+<h3>Store One Value {$storeOneEven}</h3>
